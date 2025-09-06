@@ -238,7 +238,15 @@ document.head.appendChild(themeCSS);
 function updateLogo(theme) {
   const logoImg = document.querySelector(".logo-image");
   if (!logoImg) return;
-  logoImg.src = theme === "dark" ? "../public/dark.png" : "../public/light.png";
+
+  // Check if we are inside /pages/ folder or at root
+  const basePath = window.location.pathname.includes("/pages/") ? ".." : ".";
+
+  // Update logo source depending on theme
+  logoImg.src =
+    theme === "dark"
+      ? `${basePath}/public/dark.png`
+      : `${basePath}/public/light.png`;
 }
 
 // Initialize dark mode when DOM is loaded
